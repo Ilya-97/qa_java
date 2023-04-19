@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
@@ -18,15 +17,16 @@ public class LionTest {
     private final String sex;
     private final String animalKind;
     private final boolean isManeResult;
+    @Mock
+    Feline feline;
 
-
-    public LionTest(String sex, String animalKind, boolean isManeResult){
+    public LionTest(String sex, String animalKind, boolean isManeResult) {
         this.sex = sex;
         this.animalKind = animalKind;
         this.isManeResult = isManeResult;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Пол животного, тип млекопитающего, признак наличия гривы. Тестовые данные: {0} {1} {2}")
     public static Object[][] testParams() {
         return new Object[][]{
                 {"Самец", "Хищник", true},
@@ -35,15 +35,10 @@ public class LionTest {
         };
     }
 
-
     @Before
     public void init() {
         MockitoAnnotations.openMocks(this);
     }
-
-    @Mock
-    Feline feline;
-
 
     @Test
     public void lionManeGenderMatchingTest() throws Exception {
@@ -65,5 +60,4 @@ public class LionTest {
         int actual = lion.getKittens();
         assertEquals(1, actual);
     }
-
 }

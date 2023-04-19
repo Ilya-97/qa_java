@@ -19,7 +19,8 @@ public class CatTest {
     private final String foodOne;
     private final String foodTwo;
     private final String foodThree;
-
+    @Mock
+    Feline feline;
 
     public CatTest(String foodOne, String foodTwo, String foodThree) {
         this.foodOne = foodOne;
@@ -27,7 +28,7 @@ public class CatTest {
         this.foodThree = foodThree;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Еда для Хищников. Тестовые данные: {0} {1} {2}")
     public static Object[][] testParams() {
         return new Object[][]{
                 {"Животные", "Птицы", "Рыба"}
@@ -38,9 +39,6 @@ public class CatTest {
     public void init() {
         MockitoAnnotations.openMocks(this);
     }
-
-    @Mock
-    Feline feline;
 
     @Test
     public void getCatSoundTest() {
@@ -59,6 +57,4 @@ public class CatTest {
         presetList.add(foodThree);
         assertEquals(presetList, cat.getFood());
     }
-
-
 }
